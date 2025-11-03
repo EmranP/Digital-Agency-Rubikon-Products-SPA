@@ -1,16 +1,12 @@
-type Props = {
-	value: 'all' | 'favorites'
-	onChange: (value: 'all' | 'favorites') => void
-	countAll: number
-	countFav: number
-}
+import { IFilterBarProps } from '@/types'
+import { FC } from 'react'
 
-export default function FilterBar({
+export const FilterBar: FC<IFilterBarProps> = ({
 	value,
 	onChange,
 	countAll,
 	countFav,
-}: Props) {
+}) => {
 	return (
 		<div className='toolbar'>
 			<div className='filter' role='tablist' aria-label='Фильтр'>

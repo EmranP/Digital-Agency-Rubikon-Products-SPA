@@ -1,4 +1,4 @@
-import Rating from '@/components/Rating'
+import { Rating } from '@/components/Rating'
 import { useProductsStore } from '@/store/products'
 import { useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'

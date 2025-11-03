@@ -1,13 +1,5 @@
-import { Product } from '@/types'
+import { IFilterOptions, Product, TypeFilter } from '@/types'
 import { create } from 'zustand'
-
-type Filter = 'all' | 'favorites'
-
-type FilterOptions = {
-	priceMin: number | null
-	priceMax: number | null
-	ratingMin: number | null
-}
 
 const STORAGE_KEYS = {
 	products: 'products-store',
@@ -36,9 +28,9 @@ const saveToStorage = <T>(key: string, value: T): void => {
 type ProductsState = {
 	products: Product[]
 	favorites: Record<number, true>
-	filter: Filter
+	filter: TypeFilter
 	searchQuery: string
-	filterOptions: FilterOptions
+	filterOptions: IFilterOptions
 	currentPage: number
 	loading: boolean
 	deletingIds: Set<number>
@@ -51,9 +43,9 @@ type ProductsState = {
 		id: number,
 		product: Partial<Omit<Product, 'id'>>
 	) => Promise<void>
-	setFilter: (filter: Filter) => void
+	setFilter: (filter: TypeFilter) => void
 	setSearchQuery: (query: string) => void
-	setFilterOptions: (options: Partial<FilterOptions>) => void
+	setFilterOptions: (options: Partial<IFilterOptions>) => void
 	setPage: (page: number) => void
 	getById: (id: number) => Product | undefined
 	getVisible: () => Product[]
@@ -67,13 +59,13 @@ type ProductsState = {
 const initialState = {
 	products: loadFromStorage<Product[]>(STORAGE_KEYS.products, []),
 	favorites: loadFromStorage<Record<number, true>>(STORAGE_KEYS.favorites, {}),
-	filter: 'all' as Filter,
+	filter: 'all' as TypeFilter,
 	searchQuery: '',
 	filterOptions: {
 		priceMin: null,
 		priceMax: null,
 		ratingMin: null,
-	} as FilterOptions,
+	} as IFilterOptions,
 	currentPage: 1,
 	loading: false,
 	deletingIds: new Set<number>(),
@@ -171,7 +163,7 @@ export const useProductsStore = create<ProductsState>((set, get) => ({
 	setSearchQuery(query: string) {
 		set({ searchQuery: query, currentPage: 1 })
 	},
-	setFilterOptions(options: Partial<FilterOptions>) {
+	setFilterOptions(options: Partial<IFilterOptions>) {
 		set({
 			filterOptions: { ...get().filterOptions, ...options },
 			currentPage: 1,

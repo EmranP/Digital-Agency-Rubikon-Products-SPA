@@ -1,10 +1,11 @@
-type Props = {
-	rate: number
-	count?: number
-	showCount?: boolean
-}
+import { IRatingProps } from '@/types'
+import { FC } from 'react'
 
-export default function Rating({ rate, count, showCount = false }: Props) {
+export const Rating: FC<IRatingProps> = ({
+	rate,
+	count,
+	showCount = false,
+}) => {
 	const fullStars = Math.floor(rate)
 	const hasHalfStar = rate % 1 >= 0.5
 	const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0)

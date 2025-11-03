@@ -1,17 +1,7 @@
 import { useProductsStore } from '@/store/products'
-import { FormEvent, useEffect, useState } from 'react'
+import { IFormData, TypeFormErrors } from '@/types'
+import { ChangeEvent, FormEvent, useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-
-type FormData = {
-	title: string
-	description: string
-	price: string
-	image: string
-	ratingRate: string
-	ratingCount: string
-}
-
-type FormErrors = Partial<Record<keyof FormData, string>>
 
 export default function EditProductPage() {
 	const navigate = useNavigate()
@@ -20,7 +10,7 @@ export default function EditProductPage() {
 	const { getById, updateProduct, fetchProducts } = useProductsStore()
 	const product = getById(id)
 
-	const [formData, setFormData] = useState<FormData>({
+	const [formData, setFormData] = useState<IFormData>({
 		title: '',
 		description: '',
 		price: '',
@@ -28,7 +18,7 @@ export default function EditProductPage() {
 		ratingRate: '0',
 		ratingCount: '0',
 	})
-	const [errors, setErrors] = useState<FormErrors>({})
+	const [errors, setErrors] = useState<TypeFormErrors>({})
 	const [isSubmitting, setIsSubmitting] = useState(false)
 
 	useEffect(() => {
@@ -62,7 +52,7 @@ export default function EditProductPage() {
 	}
 
 	const validate = (): boolean => {
-		const newErrors: FormErrors = {}
+		const newErrors: TypeFormErrors = {}
 
 		if (!formData.title.trim()) {
 			newErrors.title = 'Название обязательно'
@@ -133,8 +123,8 @@ export default function EditProductPage() {
 	}
 
 	const handleChange =
-		(field: keyof FormData) =>
-		(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+		(field: keyof IFormData) =>
+		(e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
 			setFormData(prev => ({ ...prev, [field]: e.target.value }))
 			if (errors[field]) {
 				setErrors(prev => ({ ...prev, [field]: undefined }))

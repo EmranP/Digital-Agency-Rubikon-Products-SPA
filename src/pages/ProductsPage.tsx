@@ -1,8 +1,8 @@
-import AdvancedFilters from '@/components/AdvancedFilters'
-import FilterBar from '@/components/FilterBar'
-import Pagination from '@/components/Pagination'
-import ProductCard from '@/components/ProductCard'
-import SearchBar from '@/components/SearchBar'
+import { AdvancedFilters } from '@/components/AdvancedFilters'
+import { FilterBar } from '@/components/FilterBar'
+import { Pagination } from '@/components/Pagination'
+import { ProductCard } from '@/components/ProductCard'
+import { SearchBar } from '@/components/SearchBar'
 import { useProductsStore } from '@/store/products'
 import { useEffect, useState } from 'react'
 

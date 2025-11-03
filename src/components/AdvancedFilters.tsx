@@ -1,18 +1,12 @@
-type FilterOptions = {
-	priceMin: number | null
-	priceMax: number | null
-	ratingMin: number | null
-}
+import type { FilterOptions, IAdvancedFiltersProps } from '@/types'
+import type { ChangeEvent, FC } from 'react'
 
-type Props = {
-	options: FilterOptions
-	onChange: (options: Partial<FilterOptions>) => void
-}
-
-export default function AdvancedFilters({ options, onChange }: Props) {
+export const AdvancedFilters: FC<IAdvancedFiltersProps> = ({
+	options,
+	onChange,
+}) => {
 	const handleChange =
-		(field: keyof FilterOptions) =>
-		(e: React.ChangeEvent<HTMLInputElement>) => {
+		(field: keyof FilterOptions) => (e: ChangeEvent<HTMLInputElement>) => {
 			const value = e.target.value
 			onChange({
 				[field]: value === '' ? null : parseFloat(value),

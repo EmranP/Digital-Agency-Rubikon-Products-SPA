@@ -1,9 +1,7 @@
-type Props = {
-	value: string
-	onChange: (value: string) => void
-}
+import { ISearchBarProps } from '@/types'
+import { FC } from 'react'
 
-export default function SearchBar({ value, onChange }: Props) {
+export const SearchBar: FC<ISearchBarProps> = ({ value, onChange }) => {
 	return (
 		<div className='search-bar'>
 			<input

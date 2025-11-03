@@ -1,6 +1,7 @@
+import { FC } from 'react'
 import { NavLink, Outlet } from 'react-router-dom'
 
-export default function App() {
+export const App: FC = () => {
 	return (
 		<div className='app'>
 			<header className='header'>

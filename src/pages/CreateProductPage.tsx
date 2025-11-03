@@ -1,22 +1,12 @@
 import { useProductsStore } from '@/store/products'
-import { FormEvent, useState } from 'react'
+import { IFormData, TypeFormErrors } from '@/types'
+import { ChangeEvent, FormEvent, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-
-type FormData = {
-	title: string
-	description: string
-	price: string
-	image: string
-	ratingRate: string
-	ratingCount: string
-}
-
-type FormErrors = Partial<Record<keyof FormData, string>>
 
 export default function CreateProductPage() {
 	const navigate = useNavigate()
 	const { createProduct } = useProductsStore()
-	const [formData, setFormData] = useState<FormData>({
+	const [formData, setFormData] = useState<IFormData>({
 		title: '',
 		description: '',
 		price: '',
@@ -24,11 +14,11 @@ export default function CreateProductPage() {
 		ratingRate: '0',
 		ratingCount: '0',
 	})
-	const [errors, setErrors] = useState<FormErrors>({})
+	const [errors, setErrors] = useState<TypeFormErrors>({})
 	const [isSubmitting, setIsSubmitting] = useState(false)
 
 	const validate = (): boolean => {
-		const newErrors: FormErrors = {}
+		const newErrors: TypeFormErrors = {}
 
 		if (!formData.title.trim()) {
 			newErrors.title = 'Название обязательно'
@@ -99,8 +89,8 @@ export default function CreateProductPage() {
 	}
 
 	const handleChange =
-		(field: keyof FormData) =>
-		(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+		(field: keyof IFormData) =>
+		(e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
 			setFormData(prev => ({ ...prev, [field]: e.target.value }))
 			if (errors[field]) {
 				setErrors(prev => ({ ...prev, [field]: undefined }))

@@ -1,22 +1,15 @@
-import { Product } from '@/types'
+import { IProductCardProps } from '@/types'
+import { FC } from 'react'
 import { useNavigate } from 'react-router-dom'
-import Rating from './Rating'
+import { Rating } from './Rating'
 
-type Props = {
-	product: Product
-	liked: boolean
-	isDeleting?: boolean
-	onToggleLike: (id: number) => void
-	onDelete: (id: number) => Promise<void>
-}
-
-export default function ProductCard({
+export const ProductCard: FC<IProductCardProps> = ({
 	product,
 	liked,
 	isDeleting = false,
 	onToggleLike,
 	onDelete,
-}: Props) {
+}) => {
 	const navigate = useNavigate()
 
 	const goToDetails = () => navigate(`/products/${product.id}`)

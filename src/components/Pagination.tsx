@@ -1,14 +1,11 @@
-type Props = {
-	currentPage: number
-	totalPages: number
-	onPageChange: (page: number) => void
-}
+import { IPaginationProps } from '@/types'
+import { FC } from 'react'
 
-export default function Pagination({
+export const Pagination: FC<IPaginationProps> = ({
 	currentPage,
 	totalPages,
 	onPageChange,
-}: Props) {
+}) => {
 	if (totalPages <= 1) return null
 
 	const pages = []

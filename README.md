@@ -93,7 +93,7 @@ npm run preview
 После деплоя приложение будет доступно по адресу:
 
 ```
-https://ваш-username.github.io/Digital-Agency-Rubikon/
+https://emranp.github.io/Digital-Agency-Rubikon-Products-SPA/
 ```
 
 ## 📁 Структура проекта
